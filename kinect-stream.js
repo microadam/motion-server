@@ -21,8 +21,13 @@ function kinectStreams() {
   util.inherits(VideoStream, ReadableStream)
 
   VideoStream.prototype.start = function () {
+    var lastRunTime = null
     this.context.on('video', function (buf) {
-      this.push(buf)
+      var now = (new Date()).getTime()
+      if (!lastRunTime || now - lastRunTime > (1000 / 5)) {
+        lastRunTime = now
+        this.push(buf)
+      }
       // var isBeingRead = this.push(buf)
       // if (!isBeingRead) {
       //   this.context.pause()
