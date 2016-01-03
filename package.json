@@ -6,7 +6,7 @@
   "dependencies": {
     "binary-pack": "^1.0.2",
     "bufferstream": "^0.6.2",
-    "kinect": "^0.3.0",
+    "kinect": "microadam/node-kinect",
     "motion": "^0.2.2",
     "primus": "^4.0.4",
     "primus-emitter": "^3.1.1",
