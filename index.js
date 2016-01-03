@@ -1,7 +1,7 @@
 var onHttpConnection = require('./connection-handler')
   , unpipe = require('unpipe')
   , MotionDetect = require('./motion-stream')
-  , motionDetectStream = new MotionDetect({ minChange: 8 })
+  , motionDetectStream = new MotionDetect({ minChange: 4 })
   , kinect = require('./kinect-stream')()
   , videoStream = new kinect.VideoStream()
   , BufferStream = require('bufferstream')
