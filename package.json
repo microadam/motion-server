@@ -6,8 +6,10 @@
   "dependencies": {
     "binary-pack": "^1.0.2",
     "bufferstream": "^0.6.2",
+    "jpeg": "^2.0.0",
+    "jpegs2mjpeg": "0.0.1",
     "kinect": "microadam/node-kinect",
-    "motion": "^0.2.2",
+    "motion-detect": "^0.2.4",
     "primus": "^4.0.4",
     "primus-emitter": "^3.1.1",
     "readable-stream": "^2.0.5",

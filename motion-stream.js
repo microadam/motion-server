@@ -1,7 +1,7 @@
 module.exports = MotionStream
 
 var TranformStream = require('readable-stream').Transform
-  , Motion = require('motion').Motion
+  , Motion = require('motion-detect').Motion
   , util = require('util')
 
 function MotionStream(options) {
