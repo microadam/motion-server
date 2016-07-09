@@ -53,6 +53,11 @@ controlServer.on('connection', function (spark) {
     kinect.control.setVideoMode(data.mode)
     spark.send('videoModeChange', data)
   })
+
+  spark.on('changeTilt', function (data) {
+    kinect.control.tilt(data.tilt)
+  })
+
 })
 
 videoServer.on('connection', function (spark) {
