@@ -4,17 +4,23 @@ var createConnectionHandler = require('./connection-handler')
   , motionDetectStream = new MotionDetect({ minChange: 6, threshold: 0x10 })
   , kinect = require('./kinect-stream')()
   , videoStream = new kinect.VideoStream()
-  , depthStream = new kinect.DepthStream()
+  // , depthStream = new kinect.DepthStream()
   , BufferStream = require('bufferstream')
   , bufferedStream = new BufferStream()
+  , JpegStream = require('./jpeg-stream')
+  , jpegStream = new JpegStream()
+  , FaceStream = require('./face-stream')
+  , faceStream = new FaceStream()
   , http = require('http')
   , Primus = require('primus')
   , Emitter = require('primus-emitter')
 
-depthStream.pipe(motionDetectStream)
+// depthStream.pipe(motionDetectStream)
 videoStream.pipe(bufferedStream)
+bufferedStream.pipe(jpegStream)
+jpegStream.pipe(faceStream)
 
-var onHttpConnection = createConnectionHandler(bufferedStream)
+var onHttpConnection = createConnectionHandler(jpegStream)
   , httpServer = http.createServer(onHttpConnection)
   , videoServer = new Primus(httpServer
     , { transformer: 'websockets'
@@ -43,6 +49,15 @@ motionDetectStream.on('motion', function () {
     kinect.control.led('off')
   }, 500)
   controlServer.send('motion')
+})
+
+faceStream.on('data', function () {})
+faceStream.on('face', function () {
+  kinect.control.led('yellow')
+  setTimeout(function () {
+    kinect.control.led('off')
+  }, 500)
+  controlServer.send('face')
 })
 
 controlServer.on('connection', function (spark) {

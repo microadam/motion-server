@@ -1,16 +1,13 @@
 module.exports = createConnectionHandler
 
 var fs = require('fs')
-  , JpegStream = require('./jpeg-stream')
   , Jpegs2mjpeg = require('jpegs2mjpeg')
 
-function createConnectionHandler(videoStream) {
+function createConnectionHandler(jpegStream) {
 
   var mjpeg = new Jpegs2mjpeg()
 
   mjpeg.on('ready', function () {
-    var jpegStream = new JpegStream()
-    videoStream.pipe(jpegStream)
     mjpeg.send(jpegStream)
   })
 

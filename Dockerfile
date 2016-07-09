@@ -1,6 +1,6 @@
 FROM node:0.10.41
 
-RUN apt-get update && apt-get install -y cmake libusb-1.0-0-dev freeglut3-dev libxmu-dev libxi-dev
+RUN apt-get update && apt-get install -y cmake libusb-1.0-0-dev freeglut3-dev libxmu-dev libxi-dev libopencv-dev
 
 RUN git clone https://github.com/OpenKinect/libfreenect
 WORKDIR libfreenect
