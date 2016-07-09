@@ -10,8 +10,9 @@ var TranformStream = require('readable-stream').Transform
 
 ctx.strokeStyle = 'red'
 
-function FaceStream() {
+function FaceStream(options) {
   TranformStream.call(this)
+  this.imageDir = options.imageDir
 }
 
 util.inherits(FaceStream, TranformStream)
@@ -39,7 +40,7 @@ FaceStream.prototype._transform = function (chunk, encoding, callback) {
       if (faces.length) {
         self.emit('face')
         var canvasStream = canvas.jpegStream({ quality: 100 })
-          , outStream = fs.createWriteStream(__dirname + '/images/' + new Date() + '.jpg')
+          , outStream = fs.createWriteStream(self.imageDir + '/' + new Date() + '.jpg')
 
         canvasStream.on('data', function (canvasChunk) {
           outStream.write(canvasChunk)

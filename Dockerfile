@@ -17,6 +17,7 @@ RUN mv usr-local-libs.conf /etc/ld.so.conf.d/usr-local-libs.conf
 RUN ldconfig -v
 
 RUN mkdir -p /usr/src/app
+RUN mkdir -p /var/images
 WORKDIR /usr/src/app
 
 COPY package.json /usr/src/app/
