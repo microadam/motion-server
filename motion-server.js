@@ -20,7 +20,7 @@ videoStream.pipe(bufferedStream)
 bufferedStream.pipe(jpegStream)
 jpegStream.pipe(faceStream)
 
-var onHttpConnection = createConnectionHandler(jpegStream)
+var onHttpConnection = createConnectionHandler(bufferedStream)
   , httpServer = http.createServer(onHttpConnection)
   , videoServer = new Primus(httpServer
     , { transformer: 'websockets'
